@@ -1,0 +1,42 @@
+apply plugin: "com.android.library"
+
+apply from: "$rootProject.projectDir/gradle/dependencies.gradle"
+apply from: "$rootProject.projectDir/gradle/android.gradle"
+
+android {
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // General
+    api rootProject.ext.generalDependencies.timber
+    api rootProject.ext.generalDependencies.appCompat
+    api rootProject.ext.generalDependencies.coreKtx
+    api rootProject.ext.generalDependencies.fragmentKtx
+
+    // Architecture Components
+    api rootProject.ext.architectureComponentsDependencies.viewModel
+    api rootProject.ext.architectureComponentsDependencies.liveData
+    api rootProject.ext.architectureComponentsDependencies.paging
+
+    // Navigation library
+    api rootProject.ext.navigationDependencies.navigation
+    api rootProject.ext.navigationDependencies.navigationFragment
+
+    api rootProject.ext.ui.materialComponents
+}

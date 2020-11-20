@@ -1,0 +1,59 @@
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "dagger.hilt.android.plugin"
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 30
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=kotlinx.coroutines.FlowPreview"
+        ]
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.generalDependencies.kotlin
+    implementation rootProject.ext.generalDependencies.kotlinCoroutines
+
+    // Dagger
+    kapt rootProject.ext.daggerDependencies.daggerCompiler
+    api rootProject.ext.daggerDependencies.dagger
+    kapt rootProject.ext.daggerDependencies.hiltCompiler
+    api rootProject.ext.daggerDependencies.hiltLifecycle
+
+    testImplementation rootProject.ext.testDependencies.junitApi
+    testRuntimeOnly rootProject.ext.testDependencies.junitEngine
+    testImplementation rootProject.ext.testDependencies.mockk
+    testImplementation rootProject.ext.testDependencies.archTest
+    testImplementation rootProject.ext.testDependencies.coroutines
+}
+
+kapt {
+    correctErrorTypes true
+}
