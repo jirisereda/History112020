@@ -1,4 +1,4 @@
-package com.history112020.core
+package com.history.common
 
 import org.junit.Test
 

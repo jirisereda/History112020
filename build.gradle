@@ -2,6 +2,8 @@
 buildscript {
     apply from: "gradle/dependencies.gradle"
     ext {
+
+        rootProject.ext.kotlinVersion = '1.4.10'
         rootProject.ext.kotlinVersion = '1.4.10'
     }
 
