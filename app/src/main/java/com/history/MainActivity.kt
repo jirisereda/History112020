@@ -8,15 +8,12 @@ import com.history.databinding.MainActivityBinding
 class MainActivity : NavigationActivity<MainActivityBinding>() {
 
 
-
-    private val viewModel: MainViewModel by viewModels()
-
     override val binding: MainActivityBinding by lazy {
         MainActivityBinding.inflate(layoutInflater)
     }
 //
     override val graphId: Int
-        get() = viewModel.graphId
+        get() = R.navigation.main_graph
 //
 //    override val appBarConfiguration: AppBarConfiguration = AppBarConfiguration(
 //        topLevelDestinationIds = setOf(
